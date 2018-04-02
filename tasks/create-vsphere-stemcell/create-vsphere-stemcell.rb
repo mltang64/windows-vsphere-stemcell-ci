@@ -20,14 +20,14 @@ class VSphere < Stemcell::Builder::VSphere
             "username" => Stemcell::Builder::validate_env('VCENTER_USERNAME'),
             "password" => Stemcell::Builder::validate_env('VCENTER_PASSWORD'),
             "insecure_connection" => true,
-
             "template" => Stemcell::Builder::validate_env('BASE_TEMPLATE'),
             "folder" => Stemcell::Builder::validate_env('VCENTER_VM_FOLDER'),
-            "vm_name" =>  "packer-vmx",
-            "host" =>     Stemcell::Builder::validate_env('VCENTER_HOST'),
+            "vm_name" => "packer-vmx",
+            "host" => Stemcell::Builder::validate_env('VCENTER_HOST'),
+            "datastore" => Stemcell::Builder::validate_env('VCENTER_DATASTORE'),
             "resource_pool" => "",
-            # "ssh_username" => 'Administrator',
-            # "ssh_password" => Stemcell::Builder::validate_env('ADMINISTRATOR_PASSWORD'),
+            "ssh_username" => 'Administrator',
+            "ssh_password" => Stemcell::Builder::validate_env('ADMINISTRATOR_PASSWORD'),
             'communicator' => 'winrm',
             'winrm_username' => 'Administrator',
             'winrm_password' => Stemcell::Builder::validate_env('ADMINISTRATOR_PASSWORD'),
@@ -35,6 +35,7 @@ class VSphere < Stemcell::Builder::VSphere
             'winrm_insecure' => true,
             "CPUs" => ENV.fetch('NUM_VCPUS', '4'),
             "RAM"  => ENV.fetch('MEM_SIZE', '4096'),
+            "datacenter" => ENV.fetch("VCENTER_DATACENTER"),
           }
         ]
     end)
